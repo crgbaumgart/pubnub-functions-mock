@@ -934,6 +934,24 @@ describe('#endpoint', () => {
     });
   });
 
+  it('fails adds a channel to channelGroups API', function(done) {
+    let request = Object.assign({}, endpointRequestObject);
+    let response = Object.assign({}, endpointResponseObject);
+
+    request.channelGroups = {
+      addChannels: {
+        channels: ['abcAsEasyAs123'],
+        uuid: 'USER-MJ-0',
+      }
+    }
+
+    expect(function() {
+      endpoint.channelGroups.addChannels(request, response);
+    }).to.throw(Error);
+
+    done();
+  });
+
   it('removes a channel from channelGroups API', function(done) {
     let request = Object.assign({}, endpointRequestObject);
     let response = Object.assign({}, endpointResponseObject);
@@ -962,6 +980,23 @@ describe('#endpoint', () => {
       assert.equal(testResult.body.status, correctResult.body.status, 'body.status');
       done();
     });
+  });
 
+  it('fails removes a channel from channelGroups API', function(done) {
+    let request = Object.assign({}, endpointRequestObject);
+    let response = Object.assign({}, endpointResponseObject);
+
+    request.channelGroups = {
+      removeChannels: {
+        channelGroup: 'yahBoiMichealJackson',
+        uuid: 'USER-MJ-1',
+      }
+    };
+
+    expect(function() {
+      endpoint.channelGroups.removeChannels(request, response);
+    }).to.throw(Error);
+
+    done();
   });
 });

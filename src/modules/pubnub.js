@@ -117,7 +117,7 @@ const pubnubInterface = {
   channelGroups: {
     addChannels: (obj) => {
       return new Promise((resolve) => {
-        if (typeof(obj) !== 'object' || (!obj.channels && !obj.channelGroup)) {
+        if (typeof(obj) !== 'object' || !obj.channelGroup || !obj.channels) {
           let err = '[channelGroups.addChannels] expects Object with [channels] and \'channelGroup\'';
           throw Error(err);
         }
